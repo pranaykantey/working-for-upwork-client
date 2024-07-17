@@ -250,15 +250,15 @@
                   break;
                 case 'text':
                   $_POST[ $field['id'] ] = sanitize_text_field( $_POST[ $field['id'] ] );
-                  break;
+                break;
               }
+              
               update_post_meta( $post_id, $field['id'], $_POST[ $field['id'] ] );
             } else if ( $field['type'] === 'checkbox' ) {
               update_post_meta( $post_id, $field['id'], '0' );
             }
           }
         }
-
       }
 
       if (class_exists('CustomFieldsMetabox')) {

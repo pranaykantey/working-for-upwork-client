@@ -72,13 +72,14 @@
 
                     $meta_value = get_post_meta( $post->ID, $product_name, true );
                     // var_dump($product_name);
+                    
                     $input = sprintf(
-                        '<input %s id="%s" name="%s" type="%s" value="%s">',
-                        'style="width: 100%"',
-                        $product_name,
-                        $product_name,
-                        'text',
-                        $meta_value
+                      '<input %s id="%s" name="%s" type="%s" value="%s">',
+                      'style="width: 100%"',
+                      $product_name,
+                      $product_name,
+                      'text',
+                      $meta_value
                     );
                     // end product name
                     $outputHtml .= $this->format_rows( $label, $input );
@@ -156,7 +157,19 @@
                     // product product_pros 
                     $label = '<label for="' . $product_pros . '">' . 'Product '. $i . ' Pros' . '</label>';
                     $meta_value = get_post_meta( $post->ID, $product_pros, true );
+
+                    // $regex = '/<li(.*?)>/';
+                    // $regexicon = '/<i class="fa-solid fa-check"><\/i>/';
+                    // $replace = '<li$1><i class="fa-solid fa-check"></i>';
                     
+                    // // echo preg_replace($regex, $replace, $str);
+
+                    // if( preg_match_all($regex, $field_value) != preg_match_all($regexicon, $field_value) ) {
+                    //   $meta_value = preg_replace($regex, $replace, $field_value);
+                    // }else {
+                    //   $meta_value = $field_value;
+                    // }
+
                     ob_start();
                     wp_editor(  $meta_value, $product_pros, $settings = array('textarea_name'=>$product_pros) );
                     $input = ob_get_clean();
@@ -175,6 +188,18 @@
                     $label = '<label for="' . $product_cons . '">' . 'Product '. $i . ' Cons' . '</label>';
                     $meta_value = get_post_meta( $post->ID, $product_cons, true );
                     
+                    // $regex = '/<li(.*?)>/';
+                    // $regexicon = '/<i class="fa-solid fa-xmark"><\/i>/';
+                    // $replace = '<li$1><i class="fa-solid fa-xmark"></i>';
+                    
+                    // // echo preg_replace($regex, $replace, $str);
+
+                    // if( preg_match_all($regex, $field_value) != preg_match_all($regexicon, $field_value) ) {
+                    //   $meta_value = preg_replace($regex, $replace, $field_value);
+                    // }else {
+                    //   $meta_value = $field_value;
+                    // }
+
                     ob_start();
                     wp_editor(  $meta_value, $product_cons, $settings = array('textarea_name'=>$product_cons) );
                     $input = ob_get_clean();
@@ -288,14 +313,37 @@
             // product_grade end.
             // product_pros start.
             if ( isset( $_POST[ $product_pros ] ) ) {
-                $_POST[ $product_pros ] = $_POST[ $product_pros ];
-                update_post_meta( $post_id, $product_pros, $_POST[ $product_pros ] );
+
+              $field_value = $_POST[ $product_pros ];
+              $regex = '/<li(.*?)>/';
+              // $regexicon = '/<i(.^*)>/';
+              $regexicon = '/<i(.*)>/';
+              $replace = '<li$1><i class="fa-solid fa-check"></i>';
+              if( 0 === preg_match_all($regexicon, $field_value) ) {
+                $meta_value = preg_replace($regex, $replace, $field_value);
+              }else {
+                $meta_value = $field_value;
+              }
+
+              update_post_meta( $post_id, $product_pros, $meta_value );
+
             }
             // product_pros end.
             // product_cons start.
             if ( isset( $_POST[ $product_cons ] ) ) {
-                $_POST[ $product_cons ] = $_POST[ $product_cons ];
-                update_post_meta( $post_id, $product_cons, $_POST[ $product_cons ] );
+
+                $field_value = $_POST[ $product_cons ];
+                
+                $regex = '/<li(.*?)>/';
+                $regexicon = '/<i(.*)>/';
+                $replace = '<li$1><i class="fa-solid fa-xmark"></i>';
+                if( 0 === preg_match_all($regexicon, $field_value) ) {
+                  $meta_value = preg_replace($regex, $replace, $field_value);
+                }else {
+                  $meta_value = $field_value;
+                }
+              
+                update_post_meta( $post_id, $product_cons, $meta_value );
             }
             // product_cons end.
             // product_bottom_line start.

@@ -73,7 +73,23 @@ $post_id = get_the_ID();
                         <h2><?php echo get_post_meta($post_id, 'benefits_title', true); ?></h2>
                     </div>
                     <div class="benifits-content field-content">
-                        <?php echo wpautop(get_post_meta($post_id, 'benefits_content', true)); ?>
+                        <?php
+                            $benifit_get =  wpautop(get_post_meta($post_id, 'benefits_content', true));
+                            $field_value = $benifit_get;
+                            $regex = '/<h4(.*?)>/';
+                            $regexicon = '/<i(.*)>/';
+
+                            $replace = '<h4$1><i class="fa-solid fa-check"></i>';
+
+                            if( 0 === preg_match_all($regexicon, $field_value) ) {
+                                $meta_value = preg_replace($regex, $replace, $field_value);
+                            }else {
+                                $meta_value = $field_value;
+                            }
+                            echo $meta_value;
+
+                            // echo preg_match_all('/<h4(.*?)>(.*?)<\/h4>/', $field_value);
+                        ?>
                     </div>
                 </section>
                 
@@ -82,7 +98,22 @@ $post_id = get_the_ID();
                         <h2><?php echo get_post_meta($post_id, 'usage_title', true); ?></h2>
                     </div>
                     <div class="usage-content ">
-                        <?php echo wpautop(get_post_meta($post_id, 'usage_content', true)); ?>
+                        <?php
+                            $usage_content = wpautop(get_post_meta($post_id, 'usage_content', true));
+                            
+                            $field_value = $usage_content;
+                            $regex = '/<h4(.*?)>/';
+                            $regexicon = '/<i(.*)>/';
+
+                            $replace = '<h4$1><i class="fa-solid fa-xmark"></i>';
+
+                            if( 0 === preg_match_all($regexicon, $field_value) ) {
+                                $meta_value = preg_replace($regex, $replace, $field_value);
+                            }else {
+                                $meta_value = $field_value;
+                            }
+                            echo $meta_value;
+                        ?>
                     </div>
                 </section>
 
@@ -92,7 +123,22 @@ $post_id = get_the_ID();
                             <h2><?php echo get_post_meta($post_id, 'ingredients_to_look_for_title', true); ?></h2>
                         </div>
                         <div class="key-ingredients-content field-content">
-                            <?php echo wpautop(get_post_meta($post_id, 'ingredients_to_look_for_content', true)); ?>
+                            <?php
+                                $ingredients_to_look_for_content = wpautop(get_post_meta($post_id, 'ingredients_to_look_for_content', true));
+                                
+                                $field_value = $ingredients_to_look_for_content;
+                                $regex = '/<h4(.*?)>/';
+                                $regexicon = '/<i(.*)>/';
+
+                                $replace = '<h4$1><i class="fa-solid fa-check"></i>';
+
+                                if( 0 === preg_match_all($regexicon, $field_value) ) {
+                                    $meta_value = preg_replace($regex, $replace, $field_value);
+                                }else {
+                                    $meta_value = $field_value;
+                                }
+                                echo $meta_value;
+                            ?>
                         </div>
                     </div>
                     <div class="what-to-avoid">
@@ -100,7 +146,23 @@ $post_id = get_the_ID();
                             <h2><?php echo get_post_meta($post_id, 'ingredients_to_avoid_title', true); ?></h2>
                         </div>
                         <div class="what-to-avoid-content field-content">
-                            <?php echo wpautop(get_post_meta($post_id, 'ingredients_to_avoid_content', true)); ?>
+                            <?php
+                                $ingredients_to_avoid_content = wpautop(get_post_meta($post_id, 'ingredients_to_avoid_content', true));
+                                
+                                
+                                $field_value = $ingredients_to_avoid_content;
+                                $regex = '/<h4(.*?)>/';
+                                $regexicon = '/<i(.*)>/';
+
+                                $replace = '<h4$1><i class="fa-solid fa-xmark"></i>';
+
+                                if( 0 === preg_match_all($regexicon, $field_value) ) {
+                                    $meta_value = preg_replace($regex, $replace, $field_value);
+                                }else {
+                                    $meta_value = $field_value;
+                                }
+                                echo $meta_value;
+                            ?>
                         </div>
                     </div>
                 </section>
@@ -110,7 +172,23 @@ $post_id = get_the_ID();
                         <h2><?php echo get_post_meta($post_id, 'considerations_title', true); ?></h2>
                     </div>
                     <div class="consider-content field-content">
-                        <?php echo wpautop(get_post_meta($post_id, 'considerations_content', true)); ?>
+                        <?php
+                            $considerations_content = wpautop(get_post_meta($post_id, 'considerations_content', true));
+                            
+                                
+                            $field_value = $considerations_content;
+                            $regex = '/<h4(.*?)>/';
+                            $regexicon = '/<i(.*)>/';
+
+                            $replace = '<h4$1><i class="fa-solid fa-check"></i>';
+
+                            if( 0 === preg_match_all($regexicon, $field_value) ) {
+                                $meta_value = preg_replace($regex, $replace, $field_value);
+                            }else {
+                                $meta_value = $field_value;
+                            }
+                            echo $meta_value;
+                        ?>
                     </div>
                 </section>
                 <div class="products-number-title">
